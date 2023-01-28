@@ -5,43 +5,19 @@ import sum.komponenten.*;
 
 import java.io.*;
 
-public class HuffmanbaumErsteller extends EBAnwendung {
-    // Objekte
-    Etikett hatEtikettHuffmanbaum;
-    Knopf hatKnopfHuffmanbaumErzeugen;
-    Knopf hatKnopfBeenden;
-    Zeilenbereich hatZeilenbereichBaumliste;
-    Etikett hatEtikettHuffmanbaumListe;
+public class HuffmanbaumErsteller {
+
 
     BinaryTree<ZeichenAnzahl> hatHuffmanbaum;
     List<BinaryTree<ZeichenAnzahl>> hatHuffmanbaumListe;
 
-    /**
-     * Konstruktor
-     */
-    public HuffmanbaumErsteller()
-    {
-        //Initialisierung der Oberklasse
-        super(900, 637);
 
-        hatEtikettHuffmanbaumListe = new Etikett(29, 13, 130, 25, "Huffmanbaum-Liste");
-        // Ausrichtung
-        hatEtikettHuffmanbaumListe.setzeAusrichtung(0);
-        hatEtikettHuffmanbaum = new Etikett(256, 13, 116, 25, "Huffmanbaum");
-        // Ausrichtung
-        hatEtikettHuffmanbaum.setzeAusrichtung(0);
-        hatZeilenbereichBaumliste = new Zeilenbereich(29, 37, 200, 500, "");
-        hatKnopfHuffmanbaumErzeugen = new Knopf(29, 575, 185, 38, "Huffmanbaum erzeugen");
-        hatKnopfHuffmanbaumErzeugen.setzeBearbeiterGeklickt("hatKnopfHuffmanbaumErzeugenGeklickt");
-        hatKnopfBeenden = new Knopf(256, 575, 110, 38, "Beenden");
-        hatKnopfBeenden.setzeBearbeiterGeklickt("beenden");
-    }
 
     /**
      * Vorher: Ereignis GeklicktvonhatKnopfHuffmanbaumErzeugen fand statt.
      * Nachher: Aus der Liste von Huffmanbaeumen wurde der zum Kodieren benoetigte Huffmanbaum erzeugt
      */
-    public void ladeListeUndErstelleBaum() {
+    public HuffmanbaumErsteller() {
         this.ladeHuffmanbaumListe();
         while (hatHuffmanbaumListe.length() > 1) {
             this.reduziereHuffmanbaumListe(hatHuffmanbaumListe);
