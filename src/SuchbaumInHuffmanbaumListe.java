@@ -8,52 +8,23 @@ import sum.komponenten.Zeilenbereich;
 
 import java.io.*;
 
-public class SuchbaumInHuffmanbaumListe extends EBAnwendung {
-    // Objekte
-    Etikett hatEtikettHaeufigkeitsbaum, hatEtikettHuffmanbaumListe;
-    Knopf hatKnopfInBaumliste;
-    Knopf hatKnopfBeenden;
-    Zeilenbereich hatZeilenbereichBaumliste;
+public class SuchbaumInHuffmanbaumListe {
 
     BinarySearchTree<ZeichenAnzahl> hatZeichenzaehlbaum;
     List<BinaryTree<ZeichenAnzahl>> hatHuffmanbaumListe;
 
     /**
-     * Konstruktor
-     */
-    public SuchbaumInHuffmanbaumListe() {
-        //Initialisierung der Oberklasse
-        super(700, 647);
-
-        hatEtikettHaeufigkeitsbaum = new Etikett(10, 10, 116, 25, "H�ufigkeitsbaum");
-        // Ausrichtung
-        hatEtikettHaeufigkeitsbaum.setzeAusrichtung(0);
-        hatEtikettHuffmanbaumListe = new Etikett(550, 10, 130, 25, "Huffmanbaum-Liste");
-        // Ausrichtung
-        hatEtikettHuffmanbaumListe.setzeAusrichtung(0);
-        hatZeilenbereichBaumliste = new Zeilenbereich(550, 30, 130, 500, "");        
-        hatKnopfInBaumliste = new Knopf(29, 575, 110, 30, "In Baumliste");
-        hatKnopfInBaumliste.setzeBearbeiterGeklickt("hatKnopfInBaumlisteGeklickt");
-        hatKnopfBeenden = new Knopf(267, 575, 110, 30, "Beenden");
-        hatKnopfBeenden.setzeBearbeiterGeklickt("beenden");
-
-    }
-
-    /**
      * Vorher: Ereignis GeklicktvonhatKnopfInBaumliste fand statt.
      * Nachher: Der Haeufigkeitsbaum wurde geladen und umgewandelt.
      */
-    public void hatKnopfInBaumlisteGeklickt() {
+    public SuchbaumInHuffmanbaumListe() {
         this.ladeZeichenzaehlbaum();
-        Baumdarsteller lDarsteller = new Baumdarsteller();
-        lDarsteller.zeige(hatZeichenzaehlbaum, 0, 550, 30);
         hatHuffmanbaumListe = this.huffmanbaumListeAus(hatZeichenzaehlbaum);
-        this.zeigeHuffmanbaumListe();
         this.speichereHuffmanbaumListe();
     }
 
     /**
-     * nachher: Mit Hilfe des Zeichenzaehlbaums wurde eine Liste aus Huffmanbaeumen mit je einem Knoten geliefert.
+     * nachher: Mithilfe des Zeichenzaehlbaums wurde eine Liste aus Huffmanbaeumen mit je einem Knoten geliefert.
      */
     private List<BinaryTree<ZeichenAnzahl>> huffmanbaumListeAus(BinarySearchTree<ZeichenAnzahl> pZeichenzaehlbaum) {
         List<BinaryTree<ZeichenAnzahl>> lBaumListe = new List<>();
@@ -75,20 +46,7 @@ public class SuchbaumInHuffmanbaumListe extends EBAnwendung {
         }
     }
 
-    private void zeigeHuffmanbaumListe() {
-        hatZeilenbereichBaumliste.loescheAlles();
-        hatHuffmanbaumListe.toFirst();
-        while (hatHuffmanbaumListe.hasAccess()) {
-            BinaryTree<ZeichenAnzahl> lHuffmanbaum = hatHuffmanbaumListe.getContent();
-            ZeichenAnzahl lZeichenAnzahl = lHuffmanbaum.getContent();
-            hatZeilenbereichBaumliste.haengeAn(lZeichenAnzahl.toString());
-            hatHuffmanbaumListe.next();
-        }
-
-    }
-
-    public void ladeZeichenzaehlbaum()
-    {
+    public void ladeZeichenzaehlbaum() {
         try
         {
             ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream("Zeichenzaehlbaum.ser"));
