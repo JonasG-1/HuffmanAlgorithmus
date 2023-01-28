@@ -15,7 +15,8 @@ public class Controller {
 
     public void kodiere() {
         new Hauefigkeitszaehler(oberflaeche.gibText());
-
+        new SuchbaumInHuffmanbaumListe();
         new HuffmanbaumErsteller();
+        new CodebaumAusHuffmanbaum();
     }
 }
