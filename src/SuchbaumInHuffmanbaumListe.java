@@ -1,10 +1,6 @@
 import baumstrukturen.BinarySearchTree;
 import baumstrukturen.BinaryTree;
 import linearestrukturen.List;
-import sum.ereignis.EBAnwendung;
-import sum.komponenten.Etikett;
-import sum.komponenten.Knopf;
-import sum.komponenten.Zeilenbereich;
 
 import java.io.*;
 
@@ -12,12 +8,16 @@ public class SuchbaumInHuffmanbaumListe {
 
     BinarySearchTree<ZeichenAnzahl> hatZeichenzaehlbaum;
     List<BinaryTree<ZeichenAnzahl>> hatHuffmanbaumListe;
+    String zDateinameZaehlbaum;
+    String zDateinameHuffmanbaumListe;
 
     /**
      * Vorher: Ereignis GeklicktvonhatKnopfInBaumliste fand statt.
      * Nachher: Der Haeufigkeitsbaum wurde geladen und umgewandelt.
      */
-    public SuchbaumInHuffmanbaumListe() {
+    public SuchbaumInHuffmanbaumListe(String pDateinameZaehlbaum, String pDateinameHuffmanbaumListe) {
+        zDateinameZaehlbaum = pDateinameZaehlbaum;
+        zDateinameHuffmanbaumListe = pDateinameHuffmanbaumListe;
         this.ladeZeichenzaehlbaum();
         hatHuffmanbaumListe = this.huffmanbaumListeAus(hatZeichenzaehlbaum);
         this.speichereHuffmanbaumListe();
@@ -49,7 +49,7 @@ public class SuchbaumInHuffmanbaumListe {
     public void ladeZeichenzaehlbaum() {
         try
         {
-            ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream("Zeichenzaehlbaum.ser"));
+            ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream(zDateinameZaehlbaum));
             hatZeichenzaehlbaum = (BinarySearchTree<ZeichenAnzahl>) lDatei.readObject();
             lDatei.close();
         }
@@ -67,7 +67,7 @@ public class SuchbaumInHuffmanbaumListe {
     {
         try
         {
-            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream("HuffmanbaumListe.ser"));
+            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream(zDateinameHuffmanbaumListe));
             lDatei.writeObject(hatHuffmanbaumListe);
             lDatei.close();
         }

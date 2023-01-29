@@ -1,7 +1,5 @@
 import baumstrukturen.*;
 import linearestrukturen.*;
-import sum.ereignis.*;
-import sum.komponenten.*;
 
 import java.io.*;
 
@@ -10,6 +8,8 @@ public class HuffmanbaumErsteller {
 
     BinaryTree<ZeichenAnzahl> hatHuffmanbaum;
     List<BinaryTree<ZeichenAnzahl>> hatHuffmanbaumListe;
+    String zDateinameHuffmanbaumListe;
+    String zDateinameHuffmanbaum;
 
 
 
@@ -17,15 +17,15 @@ public class HuffmanbaumErsteller {
      * Vorher: Ereignis GeklicktvonhatKnopfHuffmanbaumErzeugen fand statt.
      * Nachher: Aus der Liste von Huffmanbaeumen wurde der zum Kodieren benoetigte Huffmanbaum erzeugt
      */
-    public HuffmanbaumErsteller() {
+    public HuffmanbaumErsteller(String pDateinameHuffmanbaumListe, String pDateinameHuffmanbaum) {
+        zDateinameHuffmanbaumListe = pDateinameHuffmanbaumListe;
+        zDateinameHuffmanbaum = pDateinameHuffmanbaum;
         this.ladeHuffmanbaumListe();
         while (hatHuffmanbaumListe.length() > 1) {
             this.reduziereHuffmanbaumListe(hatHuffmanbaumListe);
         }
         hatHuffmanbaumListe.toFirst();
         hatHuffmanbaum = hatHuffmanbaumListe.getContent();
-        Baumdarsteller lDarsteller = new Baumdarsteller();
-        lDarsteller.zeige(hatHuffmanbaum, 256, 900, 37);
         this.speichereHuffmanbaum();
     }
 
@@ -81,7 +81,7 @@ public class HuffmanbaumErsteller {
     {
         try
         {
-            ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream("HuffmanbaumListe.ser"));
+            ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream(zDateinameHuffmanbaumListe));
             hatHuffmanbaumListe = (List<BinaryTree<ZeichenAnzahl>>) lDatei.readObject();
             lDatei.close();
         }
@@ -99,7 +99,7 @@ public class HuffmanbaumErsteller {
     {
         try
         {
-            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream("Huffmanbaum.ser"));
+            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream(zDateinameHuffmanbaum));
             lDatei.writeObject(hatHuffmanbaum);
             lDatei.close();
         }

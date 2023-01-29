@@ -9,8 +9,7 @@ import sum.ereignis.Muster;
  * @author Horst Hildebrecht
  * @version 1
  */
-public class Baumdarsteller 
-{
+public class Baumdarsteller {
 
     final static int ASCENT = 11;
     final static int DESCENT = 2;
@@ -26,8 +25,7 @@ public class Baumdarsteller
     /**
      * Der Baumdarsteller hat einen Stift, mit dem er einen Baum darstellen kann.
      */
-    public Baumdarsteller()
-    {
+    public Baumdarsteller() {
         hatStift = new Buntstift();
     }
 

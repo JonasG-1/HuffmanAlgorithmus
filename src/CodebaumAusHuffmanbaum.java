@@ -1,8 +1,5 @@
 import baumstrukturen.BinarySearchTree;
 import baumstrukturen.BinaryTree;
-import sum.ereignis.EBAnwendung;
-import sum.komponenten.Etikett;
-import sum.komponenten.Knopf;
 
 import java.io.*;
 
@@ -10,11 +7,15 @@ public class CodebaumAusHuffmanbaum {
 
     BinaryTree<ZeichenAnzahl> hatHuffmanbaum;
     BinarySearchTree<ZeichenCode> hatZeichenCodeBaum;
+    String zDateinameHuffmanbaum;
+    String zDateinameZeichenCodebaum;
 
     /**
      * Konstruktor
      */
-    public CodebaumAusHuffmanbaum() {
+    public CodebaumAusHuffmanbaum(String pDateinameHuffmanbaum, String pDateinameZeichenCodeBaum) {
+        zDateinameHuffmanbaum = pDateinameHuffmanbaum;
+        zDateinameZeichenCodebaum = pDateinameZeichenCodeBaum;
         this.ladeHuffmanbaum();
         this.erzeugeZeichenCodeBaum();
         this.speichereZeichenCodeBaum();
@@ -53,7 +54,7 @@ public class CodebaumAusHuffmanbaum {
     {
         try
         {
-            ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream("Huffmanbaum.ser"));
+            ObjectInputStream lDatei = new ObjectInputStream(new FileInputStream(zDateinameHuffmanbaum));
             hatHuffmanbaum = (BinaryTree<ZeichenAnzahl>) lDatei.readObject();
             lDatei.close();
         }
@@ -71,7 +72,7 @@ public class CodebaumAusHuffmanbaum {
     {
         try
         {
-            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream("ZeichenCodeBaum.ser"));
+            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream(zDateinameZeichenCodebaum));
             lDatei.writeObject(hatZeichenCodeBaum);
             lDatei.close();
         }

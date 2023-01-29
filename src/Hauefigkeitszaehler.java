@@ -1,8 +1,4 @@
 import baumstrukturen.BinarySearchTree;
-import sum.ereignis.EBAnwendung;
-import sum.komponenten.Etikett;
-import sum.komponenten.Knopf;
-import sum.komponenten.Zeichenbereich;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,6 +9,8 @@ public class Hauefigkeitszaehler {
 
     BinarySearchTree<ZeichenAnzahl> hatZeichenzaehlbaum;
     String zText;
+    String zDateinameText;
+    String zDateinameZaehlbaum;
 
 
 
@@ -20,12 +18,12 @@ public class Hauefigkeitszaehler {
      * Vorher: Ereignis GeklicktvonhatKnopfZaehlen fand statt.
      * Nachher: Ein Zeichenzaehlbaum wurde aus dem zu kodierenden Text erstellt und abgespeichert.
      */
-    public Hauefigkeitszaehler(String pText) {
+    public Hauefigkeitszaehler(String pDateinameText, String pDateinameZaehlbaum, String pText) {
+        zDateinameText = pDateinameText;
+        zDateinameZaehlbaum = pDateinameZaehlbaum;
         zText = pText;
         this.speichereText();
         hatZeichenzaehlbaum = this.zeichenzaehlbaumAus(zText);
-        Baumdarsteller lDarsteller = new Baumdarsteller();
-        lDarsteller.zeige(hatZeichenzaehlbaum, 0, 600, 160);
         this.speichereZeichenzaehlbaum();
     }
 
@@ -52,7 +50,7 @@ public class Hauefigkeitszaehler {
     {
         try
         {
-            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream("Text.ser"));
+            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream(zDateinameText));
             lDatei.writeObject(zText);
             lDatei.close();
         }
@@ -66,7 +64,7 @@ public class Hauefigkeitszaehler {
     {
         try
         {
-            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream("Zeichenzaehlbaum.ser"));
+            ObjectOutputStream lDatei = new ObjectOutputStream(new FileOutputStream(zDateinameZaehlbaum));
             lDatei.writeObject(hatZeichenzaehlbaum);
             lDatei.close();
         }
