@@ -20,13 +20,15 @@ public class Oberflaeche extends EBAnwendung {
     Knopf hatZaehlbaumKnopf;
     Knopf hatHuffmanbaumKnopf;
     Knopf hatCodebaumKnopf;
+    Etikett hatEtikettUerbersetzung;
+    Zeichenbereich hatZeichenbereichUebersetzung;
 
     /**
      * Konstruktor
      */
     public Oberflaeche(Controller pController) {
         //Initialisierung der Oberklasse
-        super(800, 800);
+        super(1000, 800);
         hatController = pController;
 
         hatEtikettBaum = new Etikett(29, 175, 134, 26, "Baum:");
@@ -34,7 +36,7 @@ public class Oberflaeche extends EBAnwendung {
         hatEtikettZuKodierenderText = new Etikett(29, 28, 134, 26, "Zu kodierender Text:");
         // Ausrichtung
         hatEtikettZuKodierenderText.setzeAusrichtung(0);
-        hatZeichenbereichZuKodierenderText = new Zeichenbereich(25, 53, 750, 100, "");
+        hatZeichenbereichZuKodierenderText = new Zeichenbereich(25, 53, 950, 100, "");
         hatZeichenbereichCode = new Zeichenbereich(25, 575, 750, 100, "");
         hatEtikettCode = new Etikett(29, 550, 134, 26, "Code:");
         hatKnopfKodieren = new Knopf(29, 730, 100, 38, "Kodieren");
@@ -48,6 +50,9 @@ public class Oberflaeche extends EBAnwendung {
         hatHuffmanbaumKnopf.setzeBearbeiterGeklickt("hatHuffmanbaumKnopfGeklickt");
         hatCodebaumKnopf = new Knopf(500, 730, 100, 38, "Codebaum");
         hatCodebaumKnopf.setzeBearbeiterGeklickt("hatCodebaumKnopfGeklickt");
+        hatEtikettUerbersetzung = new Etikett(800, 175, 134, 26, "Übersetzung:");
+        hatZeichenbereichUebersetzung = new Zeichenbereich(800, 200, 175, 475, "");
+        hatZeichenbereichUebersetzung.deaktiviere();
     }
 
     public String gibText() {
@@ -55,7 +60,9 @@ public class Oberflaeche extends EBAnwendung {
     }
 
     public void hatKnopfKodierenGeklickt() {
-        hatController.kodiere();
+        if (hatZeichenbereichZuKodierenderText.inhaltAlsText().length() > 0) {
+            hatController.kodiere();
+        }
     }
 
     public void hatZaehlbaumKnopfGeklickt() {
@@ -82,5 +89,13 @@ public class Oberflaeche extends EBAnwendung {
     public void zeichneSuchBaum(BinarySearchTree pBaum) {
         Baumdarsteller lDarsteller = new Baumdarsteller();
         lDarsteller.zeige(pBaum, 0, 800, 200);
+    }
+
+    public void heangeUebersetzungAn(String pZeichen, String pCode) {
+        hatZeichenbereichUebersetzung.haengeAn(pZeichen + ": " + pCode + "\n");
+    }
+
+    public void loescheUebersetzung() {
+        hatZeichenbereichUebersetzung.setzeInhalt("");
     }
 }

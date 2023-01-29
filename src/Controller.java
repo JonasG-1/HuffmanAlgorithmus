@@ -14,7 +14,7 @@ public class Controller {
     private final String zDateinameZeichenCodebaum = "ZeichenCodeBaum.ser";
     private final String zDateinameCode = "Code.ser";
 
-    private final TypSpeicher<BinarySearchTree<ZeichenCode>> hatZeichenCodeBaum;
+    private final TypSpeicher<BinarySearchTree<ZeichenCode>> hatZeichenCodeBaumSpeicher;
     private TypSpeicher<String> hatCodeSpeicher;
     private TypSpeicher<String> hatTextSpeicher;
     private final TypSpeicher<BinarySearchTree<ZeichenAnzahl>> hatZaehlbaumSpeicher;
@@ -28,7 +28,7 @@ public class Controller {
 
     public Controller() {
         oberflaeche = new Oberflaeche(this);
-        hatZeichenCodeBaum = new TypSpeicher<>(zDateinameZeichenCodebaum);
+        hatZeichenCodeBaumSpeicher = new TypSpeicher<>(zDateinameZeichenCodebaum);
         hatCodeSpeicher = new TypSpeicher<>(zDateinameCode);
         hatTextSpeicher = new TypSpeicher<>(zDateinameText);
         hatZaehlbaumSpeicher = new TypSpeicher<>(zDateinameZaehlbaum);
@@ -45,20 +45,36 @@ public class Controller {
                 new CodebaumKodierer(zDateinameText, zDateinameCode, zDateinameZeichenCodebaum);
         String lCode = codebaumKodierer.gibCode();
         oberflaeche.setzeCode(lCode);
+        oberflaeche.loescheUebersetzung();
+        zeigeUebersetzung();
     }
 
     public void zeigeZaehlbaum() {
-        Optional<BinarySearchTree<ZeichenAnzahl>> optional = hatZaehlbaumSpeicher.lade();
-        optional.ifPresent(oberflaeche::zeichneSuchBaum);
+        Optional<BinarySearchTree<ZeichenAnzahl>> lOptional = hatZaehlbaumSpeicher.lade();
+        lOptional.ifPresent(oberflaeche::zeichneSuchBaum);
     }
 
     public void zeigeHuffmanbaum() {
-        Optional<BinaryTree<ZeichenAnzahl>> optional = hatHuffmanbaumSpeicher.lade();
-        optional.ifPresent(oberflaeche::zeichneBaum);
+        Optional<BinaryTree<ZeichenAnzahl>> lOptional = hatHuffmanbaumSpeicher.lade();
+        lOptional.ifPresent(oberflaeche::zeichneBaum);
     }
 
     public void zeigeCodebaum() {
-        Optional<BinarySearchTree<ZeichenCode>> optional = hatZeichenCodeBaum.lade();
-        optional.ifPresent(oberflaeche::zeichneSuchBaum);
+        Optional<BinarySearchTree<ZeichenCode>> lOptional = hatZeichenCodeBaumSpeicher.lade();
+        lOptional.ifPresent(oberflaeche::zeichneSuchBaum);
+    }
+
+    private void zeigeUebersetzung() {
+        Optional<BinarySearchTree<ZeichenCode>> lOptional = hatZeichenCodeBaumSpeicher.lade();
+        lOptional.ifPresent(this::zeigeUebersetzung);
+    }
+
+    private void zeigeUebersetzung(BinarySearchTree<ZeichenCode> pBaum) {
+        ZeichenCode lZeichenCode = pBaum.getContent();
+        if (lZeichenCode != null) {
+            oberflaeche.heangeUebersetzungAn(lZeichenCode.zeichen() + "", lZeichenCode.code());
+            zeigeUebersetzung(pBaum.getLeftTree());
+            zeigeUebersetzung(pBaum.getRightTree());
+        }
     }
 }
