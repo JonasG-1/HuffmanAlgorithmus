@@ -42,7 +42,8 @@ public class Baumdarsteller {
             int lLinks = lMitte - lBreite / 2;
             int lUnten = pOben + HOEHE;
             hatStift.bewegeBis(lLinks, pOben); hatStift.zeichneRechteck(lBreite, HOEHE);
-            hatStift.bewegeBis(lLinks + RAND, pOben + RAND + ASCENT); hatStift.schreibeText(pBaum.getContent().toString());
+            hatStift.bewegeBis(lLinks + RAND, pOben + RAND + ASCENT);
+            hatStift.schreibeText(pBaum.getContent().toString());
             this.zeigeTeilbaum(pBaum.getLeftTree(), lMitte, lUnten, pLinks, lMitte);
             this.zeigeTeilbaum(pBaum.getRightTree(), lMitte, lUnten, lMitte, pRechts);
         }

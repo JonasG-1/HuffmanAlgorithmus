@@ -29,3 +29,6 @@ bin/
 .DS_Store
 
 /.idea/
+*.ser
+*.class
+*.jar
