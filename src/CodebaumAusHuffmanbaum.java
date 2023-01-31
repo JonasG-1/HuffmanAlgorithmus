@@ -42,6 +42,9 @@ public class CodebaumAusHuffmanbaum {
         ZeichenAnzahl lWurzel = pHuffmanbaum.getContent();
         if (lWurzel != null) {
             if (lWurzel.zeichen() != '#') {
+                if (pPfad.equals("")) {
+                    pPfad = "1";
+                }
                 pZeichenCodeBaum.insert(new ZeichenCode(lWurzel.zeichen(), pPfad));
             } else {
                 erstelleCodeBaumAus(pZeichenCodeBaum, pHuffmanbaum.getLeftTree(), pPfad + "0");
