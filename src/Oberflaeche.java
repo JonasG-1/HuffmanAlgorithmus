@@ -83,12 +83,12 @@ public class Oberflaeche extends EBAnwendung {
 
     public void zeichneBaum(BinaryTree pBaum) {
         Baumdarsteller lDarsteller = new Baumdarsteller();
-        lDarsteller.zeige(pBaum, 0, 800, 200);
+        lDarsteller.zeige(pBaum, 0, 760, 200);
     }
 
     public void zeichneSuchBaum(BinarySearchTree pBaum) {
         Baumdarsteller lDarsteller = new Baumdarsteller();
-        lDarsteller.zeige(pBaum, 0, 800, 200);
+        lDarsteller.zeige(pBaum, 0, 760, 200);
     }
 
     public void heangeUebersetzungAn(String pZeichen, String pCode) {
