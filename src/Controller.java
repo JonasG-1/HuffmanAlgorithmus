@@ -22,7 +22,6 @@ public class Controller {
     private final TypSpeicher<BinaryTree<ZeichenAnzahl>> hatHuffmanbaumSpeicher;
 
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         new Controller();
     }
 
